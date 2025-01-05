@@ -13,4 +13,26 @@ You can also get a premade image from the releases.
 
 # 1st step:
 Install all required stuff.
-Download 
+Download HHDRawcopy from the repo.
+Rootfs: (if not making your own rootfs download your image) 
+https://www.mediafire.com/file/v2zlm17qqsjrijj/Debian_Lenny_%2528X_server_is_broken%2529_V0.1.img/file
+# Commands :
+Install prerequisites :
+sudo apt-get install debootstrap qemu-user-static
+Make the directory and image of the rootfs : 
+mkfs debian
+sudo dd if=/dev/zero of=image.img iflag=fullblock bs=1M count=SIZE-OF-ROOTFS-IN-MB && sync
+sudo mkfs -t ext3 image.img
+sudo mount -o loop -t auto image.img debian/
+After installing debootstrap and qemu make the root fs with this command :
+Debian stretch: sudo debootstrap --foreign --arch=armel stretch debian/ http://archive.debian.org/debian/
+Debian Bookworm (slower): sudo debootstrap --foreign --arch=armel bookworm debian/
+After configuring it chroot into the install
+Way 1 (if linux is with you):
+sudo chroot debian/ /debootstrap/debootstrap --second-stage
+sudo chroot debian/
+Way 2 (if linux isn't with you):
+cp /usr/bin/qemu-arm-static debian/usr/bin/qemu-arm-static
+sudo chroot debian/ qemu-arm-static --cpu arm926 /debootstrap/debootstrap --second-stage
+sudo chroot debian/ qemu-arm-static --cpu arm926 /bin/bash
+
