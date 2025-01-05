@@ -25,6 +25,8 @@ Download HHDRawcopy from the repo.
 Rootfs: (if not making your own rootfs download your image) 
 
 https://www.mediafire.com/file/v2zlm17qqsjrijj/Debian_Lenny_%2528X_server_is_broken%2529_V0.1.img/file
+https://www.mediafire.com/file/ywp6pi71e1u15w4/Debian_Stretch_V0.1.img/file
+
 
 # Commands :
 
