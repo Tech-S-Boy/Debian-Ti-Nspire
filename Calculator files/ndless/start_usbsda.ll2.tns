@@ -1,0 +1,4 @@
+kernel linux/zImage.tns
+dtb linux/dtb.tns
+cmdline root=/dev/sda rootdelay=10 rw
+boot
