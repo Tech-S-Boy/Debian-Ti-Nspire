@@ -31,48 +31,52 @@ https://www.mediafire.com/file/ywp6pi71e1u15w4/Debian_Stretch_V0.1.img/file
 # Commands :
 
 Install prerequisites :
-
+```console
 sudo apt-get install debootstrap qemu-user-static
-
+```
 Make the directory and image of the rootfs : 
-
+```console
 mkfs debian
 
 sudo dd if=/dev/zero of=image.img iflag=fullblock bs=1M count=SIZE-OF-ROOTFS-IN-MB && sync
 
 sudo mkfs -t ext3 image.img
-
+```
 sudo mount -o loop -t auto image.img debian/
 
 # 2st step:
 
 After installing debootstrap and qemu make the root fs with this command :
 
-Debian stretch: sudo debootstrap --foreign --arch=armel stretch debian/ http://archive.debian.org/debian/
+Debian stretch:
+```console
+sudo debootstrap --foreign --arch=armel stretch debian/ http://archive.debian.org/debian/
 
-Debian Bookworm (slower): sudo debootstrap --foreign --arch=armel bookworm debian/
-
+Debian Bookworm (slower):
+```console
+sudo debootstrap --foreign --arch=armel bookworm debian/
+```
 After configuring it chroot into the install
 
 Way 1 (if linux is with you):
-
+```console
 sudo chroot debian/ /debootstrap/debootstrap --second-stage
 
 sudo chroot debian/
-
+```
 Way 2 (if linux isn't with you):
-
+```console
 cp /usr/bin/qemu-arm-static debian/usr/bin/qemu-arm-static
 
 sudo chroot debian/ qemu-arm-static --cpu arm926 /debootstrap/debootstrap --second-stage
 
 sudo chroot debian/ qemu-arm-static --cpu arm926 /bin/bash
- 
+```
 # 3rd step:
 Install all required apps with apt-get :
-
+```console
 apt-get install xinit xorg xserver-xorg-core openbox firmware-misc-nonfree dillo links network-manager connman
-
+```
 (don't forget to exit the chroot and then unmount the chroot)
 # 4th step:
 after copying the file to your computer flash the image with the software of your choice (i'll use HHDRawcopy)
