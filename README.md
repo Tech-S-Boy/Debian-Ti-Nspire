@@ -72,6 +72,12 @@ sudo chroot debian/ qemu-arm-static --cpu arm926 /debootstrap/debootstrap --seco
 
 sudo chroot debian/ qemu-arm-static --cpu arm926 /bin/bash
 ```
+# 2.5th step:
+Add a root password and log root:
+```console
+passwd root
+su
+```
 # 3rd step:
 Install all required apps with apt-get :
 ```console
